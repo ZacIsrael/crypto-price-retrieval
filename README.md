@@ -1,0 +1,1 @@
+This application uses the Blockchain API to check the price of a cryptocurrency for end user. This idea was inspired by Dr. Angela Yu.
