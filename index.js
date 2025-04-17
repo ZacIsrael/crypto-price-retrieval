@@ -4,7 +4,7 @@ import express from "express";
 import axios from "axios";
 
 //used for parsing through requests & repsonses
-import bodyParse from "body-parser";
+import bodyParser from "body-parser";
 
 // 'ws' is a WebSocket client library
 import WebSocket from "ws";
@@ -28,6 +28,7 @@ app.set("view engine", "ejs");
 
 // tells EJS that all of the static files are in the public folder
 app.use(express.static("public"));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // API Key allows this application to make requests to blockchain's API
 const headers = {
@@ -51,16 +52,17 @@ app.get('/all-coins', async (req, res) => {
     let traidingPairs = result.data;
     console.log('traidingPairs = ', traidingPairs);
     // send the object that contains the trading pairs to the ejs file
-    // res.send('index', {
-    //   content: traidingPairs
-    // });
+    res.render('index', {
+      pairs: traidingPairs,
+      endpoint: '/all-coins'
+    });
 
     // Testing purposes
-    res.send(traidingPairs);
+    // res.send(traidingPairs);
 
   } catch(error){
     console.log('Error: ', error);
-    res.send('index', {
+    res.render('index', {
       content: error.data
     });
   }
@@ -71,6 +73,7 @@ app.get('/all-coins', async (req, res) => {
 // default request (when the page loads up)
 app.get('/', async (req, res) => {
   console.log("Home page");
+  res.send("<h1>Home Page</h1>")
 });
 
 // retrieve a cryptocurrency by its name

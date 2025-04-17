@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptocurrecny Retrieval</title>
+</head>
+<body>
+
+    <!-- null check to see if the "pairs" object actually exists -->
+    <% if(locals.pairs){ %>
+        <h1>Trading Pairs</h1>
+        <ul>
+        <!-- only show the first 10 pairs on the page, pagination is not within the scope of this course thus far -->
+        <% for(let i = 0; i < 10; i++) { %>
+            <!-- symbol of the trading pair -->
+            <h4><li><%=pairs[i].symbol%></li></h4>
+            <ul>
+                <!-- nested list that shows the pair's necessary fields -->
+                <li>Price: <%=pairs[i].price_24h%></li>
+                <li>Volume: <%=pairs[i].volume_24h%></li>
+                <li>Last Trade Price: <%=pairs[i].last_trade_price%></li>
+            </ul>
+        <%}%>
+    </ul>
+    <% } else { %>
+        <!-- pairs object does not exist (some type of error occured), prompt user to refresh the page -->
+        <h1>Refresh the page to request the trading pairs</h1>
+    <% }%>
+</body>
+</html>
