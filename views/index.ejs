@@ -24,8 +24,13 @@
         <%}%>
     </ul>
     <% } else { %>
-        <!-- pairs object does not exist (some type of error occured), prompt user to refresh the page -->
-        <h1>Refresh the page to request the trading pairs</h1>
+        <!-- pairs object does not exist (some type of error occured or we're on the home page) -->
+        <% if(locals.endpoint === '/'){ %>
+            <form action="/all-pairs" method="GET" class="buttons">
+                <button type="submit" value="all-pairs">Click Here to See All Trading Pairs</button>
+            </form> 
+
+        <% } %>
     <% }%>
 </body>
 </html>

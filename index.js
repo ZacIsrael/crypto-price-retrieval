@@ -42,8 +42,8 @@ const config = {
   headers: headers,
 };
 
-// this endpoint retrieves all the crypto currencies
-app.get('/all-coins', async (req, res) => {
+// this endpoint retrieves all the crypto currencies trading pairs
+app.get('/all-pairs', async (req, res) => {
 
   try {
     // gets the ticker price for all of the cryptocurrencies 
@@ -54,7 +54,7 @@ app.get('/all-coins', async (req, res) => {
     // send the object that contains the trading pairs to the ejs file
     res.render('index', {
       pairs: traidingPairs,
-      endpoint: '/all-coins'
+      endpoint: '/all-pairs'
     });
 
     // Testing purposes
@@ -73,7 +73,10 @@ app.get('/all-coins', async (req, res) => {
 // default request (when the page loads up)
 app.get('/', async (req, res) => {
   console.log("Home page");
-  res.send("<h1>Home Page</h1>")
+  res.render('index', {
+    endpoint: '/'
+  })
+  // res.send("<h1>Home Page</h1>")
 });
 
 // retrieve a cryptocurrency by its name
